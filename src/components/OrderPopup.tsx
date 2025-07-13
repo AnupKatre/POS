@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from '@/components/ui/sheet';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import type { Table, OrderItem, MenuItem } from '@/lib/types';
 import { menuItems } from '@/data/menu';
 import { Button } from './ui/button';
@@ -63,12 +63,12 @@ export default function OrderPopup({ isOpen, onOpenChange, table, onClose }: Ord
   };
 
   return (
-    <Sheet open={isOpen} onOpenChange={onOpenChange}>
-      <SheetContent className="w-full sm:max-w-4xl flex flex-col p-0">
-        <SheetHeader className="p-6 pb-2">
-          <SheetTitle className="text-2xl font-headline">Order for Table {table.number}</SheetTitle>
-          <SheetDescription>Add items to the order. Click confirm to send to kitchen.</SheetDescription>
-        </SheetHeader>
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-6xl w-full h-[90vh] flex flex-col p-0">
+        <DialogHeader className="p-6 pb-2">
+          <DialogTitle className="text-2xl font-headline">Order for Table {table.number}</DialogTitle>
+          <DialogDescription>Add items to the order. Click confirm to send to kitchen.</DialogDescription>
+        </DialogHeader>
         <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-6 overflow-hidden p-6 pt-0">
           {/* Menu List */}
           <div className="md:col-span-2 flex flex-col gap-4 h-full">
@@ -170,7 +170,7 @@ export default function OrderPopup({ isOpen, onOpenChange, table, onClose }: Ord
             )}
           </div>
         </div>
-      </SheetContent>
-    </Sheet>
+      </DialogContent>
+    </Dialog>
   );
 }
