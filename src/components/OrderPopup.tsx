@@ -9,7 +9,7 @@ import { Button } from './ui/button';
 import { Separator } from './ui/separator';
 import { Input } from './ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Plus, Minus, Search, ShoppingCart, X } from 'lucide-react';
+import { Plus, Minus, Search, ShoppingCart } from 'lucide-react';
 import { ScrollArea } from './ui/scroll-area';
 import { useToast } from "@/hooks/use-toast"
 import { cn } from '@/lib/utils';
@@ -72,9 +72,6 @@ export default function OrderPopup({ isOpen, onOpenChange, table, onClose }: Ord
                 <DialogTitle className="text-xl font-bold font-headline">Order for Table {table.number}</DialogTitle>
                 <DialogDescription className="text-sm">Add items to the order. Click confirm to send to kitchen.</DialogDescription>
             </div>
-            <Button variant="ghost" size="icon" onClick={onClose} className="rounded-full h-9 w-9 flex-shrink-0">
-                <X className="h-5 w-5"/>
-            </Button>
             </DialogHeader>
             <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 overflow-hidden p-4 sm:p-6 pt-0">
             {/* Menu List */}
