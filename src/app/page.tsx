@@ -8,7 +8,7 @@ import NotificationBell from '@/components/NotificationBell';
 import { tables } from '@/data/tables';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { LayoutGrid, ListFilter, UserCircle } from 'lucide-react';
+import { ListFilter, UserCircle } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -45,71 +45,58 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-background font-body">
-      <div className="flex w-full">
-        {/* Sidebar */}
-        <aside className="hidden w-16 flex-shrink-0 bg-card border-r md:flex flex-col items-center py-4">
-          <div className="p-2 bg-primary text-primary-foreground rounded-lg mb-8">
-            <LayoutGrid className="h-6 w-6" />
+      <div className="flex-1 flex flex-col">
+        <header className="flex h-16 items-center justify-between border-b bg-card px-4 sm:px-6">
+          <div>
+            <h1 className="text-lg font-bold text-foreground font-headline">
+              Hi, James! 👋
+            </h1>
+            <p className="text-xs text-muted-foreground">Welcome back to DineFlow.</p>
           </div>
-          <nav className="flex flex-col items-center gap-4">
-            {/* Add more nav items here if needed */}
-          </nav>
-        </aside>
+          <div className="flex items-center gap-2 sm:gap-4">
+            <NotificationBell />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="rounded-full h-9 w-9">
+                  <UserCircle className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <DropdownMenuItem>Settings</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Logout</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </header>
 
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col">
-          <header className="flex h-20 items-center justify-between border-b bg-card px-4 sm:px-6">
-            <div>
-              <h1 className="text-lg sm:text-xl font-bold text-foreground font-headline">
-                Hi, James! 👋
-              </h1>
-              <p className="text-sm text-muted-foreground">Welcome back to DineFlow.</p>
-            </div>
-            <div className="flex items-center gap-2 sm:gap-4">
-              <NotificationBell />
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="rounded-full h-10 w-10">
-                    <UserCircle className="h-6 w-6" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuItem>Settings</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Logout</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </header>
-
-          <main className="flex-1 overflow-y-auto p-4 sm:p-6">
-            <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <h2 className="text-xl md:text-2xl font-semibold">Tables Overview</h2>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="h-10">
-                    <ListFilter className="mr-2 h-4 w-4" />
-                    Filter ({activeFilter})
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>Filter by Status</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onSelect={() => setActiveFilter('All')}>All</DropdownMenuItem>
-                  {ALL_STATUSES.map(status => (
-                    <DropdownMenuItem key={status} onSelect={() => setActiveFilter(status)}>
-                      {status}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-            <TableGrid tables={filteredTables} onTableSelect={handleTableSelect} />
-          </main>
-        </div>
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6">
+          <div className="mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+            <h2 className="text-xl font-semibold">Tables Overview</h2>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="h-9">
+                  <ListFilter className="mr-2 h-4 w-4" />
+                  <span className="text-sm">Filter ({activeFilter})</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Filter by Status</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onSelect={() => setActiveFilter('All')}>All</DropdownMenuItem>
+                {ALL_STATUSES.map(status => (
+                  <DropdownMenuItem key={status} onSelect={() => setActiveFilter(status)}>
+                    {status}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          <TableGrid tables={filteredTables} onTableSelect={handleTableSelect} />
+        </main>
       </div>
       
       {selectedTable && (
