@@ -71,7 +71,7 @@ export default function TableCard({ table, onClick }: TableCardProps) {
           </Badge>
           {table.status === 'Occupied' && table.customerCount && (
             <Badge variant="outline" className={cn("text-xs font-medium", badgeColors[table.status])}>
-              {table.customerCount} People
+              {table.customerCount}
             </Badge>
           )}
         </div>
