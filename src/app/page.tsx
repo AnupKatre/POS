@@ -80,7 +80,7 @@ export default function Home() {
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="h-9">
                   <ListFilter className="mr-2 h-4 w-4" />
-                  <span className="text-sm">Filter ({activeFilter})</span>
+                  <span className="text-sm">{activeFilter}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
