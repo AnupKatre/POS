@@ -1,48 +1,71 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import type { Table } from '@/lib/types';
+import type { Table, TableStatus } from '@/lib/types';
 import { cn } from '@/lib/utils';
-import { Utensils } from 'lucide-react';
+import { Utensils, CircleSlash, Users, BellRing, Receipt } from 'lucide-react';
 
 interface TableCardProps {
   table: Table;
   onClick: () => void;
 }
 
-const statusStyles: { [key in Table['status']]: string } = {
-  Free: 'bg-green-100/50 border-green-400/50 hover:bg-green-100 dark:bg-green-900/30 dark:border-green-800/50 dark:hover:bg-green-900/50',
-  Occupied: 'bg-orange-100/50 border-orange-400/50 hover:bg-orange-100 dark:bg-orange-900/30 dark:border-orange-800/50 dark:hover:bg-orange-900/50',
-  Serving: 'bg-blue-100/50 border-blue-400/50 hover:bg-blue-100 dark:bg-blue-900/30 dark:border-blue-800/50 dark:hover:bg-blue-900/50',
-  Billing: 'bg-red-100/50 border-red-400/50 dark:bg-red-900/30 dark:border-red-800/50',
+const statusConfig: { [key in TableStatus]: {
+  icon: React.ReactNode;
+  badgeVariant: "default" | "secondary" | "destructive" | "outline";
+  cardClass: string;
+}} = {
+  Free: {
+    icon: <Utensils className="h-6 w-6 text-green-500" />,
+    badgeVariant: 'secondary',
+    cardClass: 'bg-green-500/5 hover:border-green-500/50',
+  },
+  Occupied: {
+    icon: <Users className="h-6 w-6 text-orange-500" />,
+    badgeVariant: 'outline',
+    cardClass: 'bg-orange-500/5 hover:border-orange-500/50',
+  },
+  Serving: {
+    icon: <BellRing className="h-6 w-6 text-blue-500" />,
+    badgeVariant: 'default',
+    cardClass: 'bg-blue-500/5 hover:border-blue-500/50',
+  },
+  Billing: {
+    icon: <Receipt className="h-6 w-6 text-red-500" />,
+    badgeVariant: 'destructive',
+    cardClass: 'bg-red-500/5 border-red-500/20 cursor-not-allowed opacity-80',
+  },
 };
 
-const badgeVariants = {
-    Free: "secondary",
-    Occupied: "default",
-    Serving: "outline",
-    Billing: "destructive"
-} as const;
-
+const badgeColors = {
+  Free: "bg-green-100 text-green-800 border-green-200",
+  Occupied: "bg-orange-100 text-orange-800 border-orange-200",
+  Serving: "bg-blue-100 text-blue-800 border-blue-200",
+  Billing: "bg-red-100 text-red-800 border-red-200"
+}
 
 export default function TableCard({ table, onClick }: TableCardProps) {
+  const config = statusConfig[table.status];
+
   return (
     <Card
-      onClick={onClick}
+      onClick={table.status !== 'Billing' ? onClick : undefined}
       className={cn(
-        'cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1',
-        statusStyles[table.status],
-        table.status === 'Billing' && 'cursor-not-allowed opacity-70 hover:transform-none'
+        'cursor-pointer transition-all duration-200 shadow-sm hover:shadow-lg hover:-translate-y-0.5 rounded-2xl border',
+        config.cardClass,
+        table.status === 'Billing' && 'cursor-not-allowed hover:transform-none'
       )}
     >
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">Table {table.number}</CardTitle>
-        <Utensils className="h-4 w-4 text-muted-foreground" />
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold font-headline">T-{table.number}</div>
-        <Badge variant={badgeVariants[table.status]} className="mt-2 text-xs">
+      <CardContent className="p-4 flex flex-col items-start justify-between h-full">
+        <div className='flex justify-between w-full items-start'>
+            <div className='flex flex-col'>
+                <p className="text-sm text-muted-foreground">Table</p>
+                <p className="text-3xl font-bold font-headline">{table.number}</p>
+            </div>
+            {config.icon}
+        </div>
+        <Badge variant={config.badgeVariant} className={cn("mt-4 text-xs font-medium", badgeColors[table.status])}>
           {table.status}
         </Badge>
       </CardContent>

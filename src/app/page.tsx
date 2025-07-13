@@ -8,6 +8,15 @@ import NotificationBell from '@/components/NotificationBell';
 import { tables } from '@/data/tables';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { LayoutGrid, ListFilter, UserCircle } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 const ALL_STATUSES: TableStatus[] = ['Free', 'Occupied', 'Serving', 'Billing'];
 
@@ -25,7 +34,6 @@ export default function Home() {
 
   const handleClosePopup = () => {
     setIsPopupOpen(false);
-    // Give time for animation before clearing the table
     setTimeout(() => {
       setSelectedTable(null);
     }, 300);
@@ -36,39 +44,74 @@ export default function Home() {
     : tables.filter((table) => table.status === activeFilter);
 
   return (
-    <div className="flex h-screen w-full flex-col bg-background font-body">
-      <header className="flex h-16 items-center justify-between border-b bg-card px-4 md:px-6 sticky top-0 z-30">
-        <h1 className="text-2xl font-bold tracking-tight text-foreground font-headline">
-          DineFlow
-        </h1>
-        <NotificationBell />
-      </header>
-      <main className="flex-1 overflow-y-auto p-4 md:p-6">
-        <div className="mb-4 flex flex-wrap gap-2">
-          <Button
-            variant={activeFilter === 'All' ? 'default' : 'outline'}
-            onClick={() => setActiveFilter('All')}
-          >
-            All
-          </Button>
-          {ALL_STATUSES.map(status => (
-            <Button
-              key={status}
-              variant={activeFilter === status ? 'default' : 'outline'}
-              onClick={() => setActiveFilter(status)}
-              className={cn({
-                'bg-accent/80 border-accent text-accent-foreground': activeFilter === status && status === 'Free',
-                'bg-primary/80 border-primary text-primary-foreground': activeFilter === status && status === 'Occupied',
-                'bg-blue-500/80 border-blue-500 text-white': activeFilter === status && status === 'Serving',
-                'bg-destructive/80 border-destructive text-destructive-foreground': activeFilter === status && status === 'Billing',
-              })}
-            >
-              {status}
-            </Button>
-          ))}
+    <div className="flex min-h-screen w-full flex-col bg-background font-body">
+      <div className="flex w-full">
+        {/* Sidebar */}
+        <aside className="w-16 flex-shrink-0 bg-card border-r flex flex-col items-center py-4">
+          <div className="p-2 bg-primary text-primary-foreground rounded-lg mb-8">
+            <LayoutGrid className="h-6 w-6" />
+          </div>
+          <nav className="flex flex-col items-center gap-4">
+            {/* Add more nav items here if needed */}
+          </nav>
+        </aside>
+
+        {/* Main Content */}
+        <div className="flex-1">
+          <header className="flex h-20 items-center justify-between border-b bg-card px-6">
+            <div>
+              <h1 className="text-xl font-bold text-foreground font-headline">
+                Hi, James! 👋
+              </h1>
+              <p className="text-muted-foreground text-sm">Welcome back to DineFlow.</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <NotificationBell />
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="rounded-full h-10 w-10">
+                    <UserCircle className="h-6 w-6" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Profile</DropdownMenuItem>
+                  <DropdownMenuItem>Settings</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Logout</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </header>
+
+          <main className="flex-1 overflow-y-auto p-6">
+            <div className="mb-6 flex justify-between items-center">
+              <h2 className="text-2xl font-semibold">Tables Overview</h2>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="h-10">
+                    <ListFilter className="mr-2 h-4 w-4" />
+                    Filter ({activeFilter})
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>Filter by Status</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onSelect={() => setActiveFilter('All')}>All</DropdownMenuItem>
+                  {ALL_STATUSES.map(status => (
+                    <DropdownMenuItem key={status} onSelect={() => setActiveFilter(status)}>
+                      {status}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+            <TableGrid tables={filteredTables} onTableSelect={handleTableSelect} />
+          </main>
         </div>
-        <TableGrid tables={filteredTables} onTableSelect={handleTableSelect} />
-      </main>
+      </div>
+      
       {selectedTable && (
         <OrderPopup
           isOpen={isPopupOpen}
