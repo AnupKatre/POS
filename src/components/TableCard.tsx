@@ -65,13 +65,16 @@ export default function TableCard({ table, onClick }: TableCardProps) {
             </div>
             {config.icon}
         </div>
-        <Badge variant={config.badgeVariant} className={cn("mt-3 text-xs font-medium", badgeColors[table.status])}>
-          {table.status === 'Occupied' && table.customerCount ? (
-            `${table.customerCount} People`
-          ) : (
-            table.status
+        <div className="flex flex-wrap gap-2 mt-3">
+          <Badge variant={config.badgeVariant} className={cn("text-xs font-medium", badgeColors[table.status])}>
+            {table.status}
+          </Badge>
+          {table.status === 'Occupied' && table.customerCount && (
+            <Badge variant="outline" className={cn("text-xs font-medium", badgeColors[table.status])}>
+              {table.customerCount} People
+            </Badge>
           )}
-        </Badge>
+        </div>
       </CardContent>
     </Card>
   );
