@@ -66,7 +66,11 @@ export default function TableCard({ table, onClick }: TableCardProps) {
             {config.icon}
         </div>
         <Badge variant={config.badgeVariant} className={cn("mt-3 text-xs font-medium", badgeColors[table.status])}>
-          {table.status}
+          {table.status === 'Occupied' && table.customerCount ? (
+            `${table.customerCount} People`
+          ) : (
+            table.status
+          )}
         </Badge>
       </CardContent>
     </Card>

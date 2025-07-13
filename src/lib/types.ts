@@ -4,6 +4,7 @@ export interface Table {
   id: number;
   number: number;
   status: TableStatus;
+  customerCount?: number;
 }
 
 export type MenuCategory = 'Starters' | 'Mains' | 'Drinks';
