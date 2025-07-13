@@ -66,20 +66,20 @@ export default function OrderPopup({ isOpen, onOpenChange, table, onClose }: Ord
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
         <DialogOverlay className="backdrop-blur-sm" />
-        <DialogContent className="max-w-7xl w-full h-[95vh] flex flex-col p-0 gap-0 shadow-2xl rounded-3xl border-0 data-[state=open]:zoom-in-90">
-            <DialogHeader className="p-6 pb-4 flex flex-row items-center justify-between">
+        <DialogContent className="max-w-screen-lg w-[95vw] h-[90vh] flex flex-col p-0 gap-0 shadow-2xl rounded-3xl border-0 data-[state=open]:zoom-in-90">
+            <DialogHeader className="p-4 sm:p-6 pb-4 flex flex-row items-center justify-between flex-shrink-0">
             <div>
-                <DialogTitle className="text-2xl font-bold font-headline">Order for Table {table.number}</DialogTitle>
-                <DialogDescription>Add items to the order. Click confirm to send to kitchen.</DialogDescription>
+                <DialogTitle className="text-xl sm:text-2xl font-bold font-headline">Order for Table {table.number}</DialogTitle>
+                <DialogDescription className="text-sm sm:text-base">Add items to the order. Click confirm to send to kitchen.</DialogDescription>
             </div>
             <Button variant="ghost" size="icon" onClick={onClose} className="rounded-full h-10 w-10 flex-shrink-0">
                 <X className="h-5 w-5"/>
             </Button>
             </DialogHeader>
-            <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-6 overflow-hidden p-6 pt-0">
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 overflow-hidden p-4 sm:p-6 pt-0">
             {/* Menu List */}
-            <div className="md:col-span-2 flex flex-col gap-4 h-full bg-background rounded-2xl p-4">
-                <div className="relative">
+            <div className="md:col-span-2 flex flex-col gap-4 h-full bg-background rounded-2xl p-2 sm:p-4">
+                <div className="relative flex-shrink-0">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input
                     placeholder="Search menu items..."
@@ -128,7 +128,7 @@ export default function OrderPopup({ isOpen, onOpenChange, table, onClose }: Ord
 
             {/* Cart Summary */}
             <div className="md:col-span-1 bg-card rounded-2xl flex flex-col h-full border">
-                <div className="p-4 border-b">
+                <div className="p-4 border-b flex-shrink-0">
                 <h3 className="text-lg font-semibold flex items-center">
                     <ShoppingCart className="mr-3 h-6 w-6 text-primary"/>
                     Current Order
@@ -140,15 +140,15 @@ export default function OrderPopup({ isOpen, onOpenChange, table, onClose }: Ord
                             <p className="text-center text-muted-foreground mt-8">No items in order yet.</p>
                         ) : (
                             orderItems.map((item) => (
-                            <div key={item.id} className="flex items-center justify-between">
-                                <div className='flex items-center gap-3'>
-                                    <Image src={item.image} alt={item.name} width={48} height={48} className="rounded-lg aspect-square object-cover" />
-                                    <div>
-                                        <p className="font-medium text-sm">{item.name}</p>
+                            <div key={item.id} className="flex items-center justify-between gap-2">
+                                <div className='flex items-center gap-3 overflow-hidden'>
+                                    <Image src={item.image} alt={item.name} width={48} height={48} className="rounded-lg aspect-square object-cover flex-shrink-0" />
+                                    <div className="overflow-hidden">
+                                        <p className="font-medium text-sm truncate">{item.name}</p>
                                         <p className="text-sm text-muted-foreground">${item.price.toFixed(2)}</p>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                                     <Button variant="outline" size="icon" className="h-8 w-8 rounded-lg" onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}>
                                         <Minus className="h-4 w-4" />
                                     </Button>
@@ -163,8 +163,8 @@ export default function OrderPopup({ isOpen, onOpenChange, table, onClose }: Ord
                     </div>
                 </ScrollArea>
                 {orderItems.length > 0 && (
-                    <div className="p-4 mt-auto border-t">
-                        <Separator className="my-4"/>
+                    <div className="p-4 mt-auto border-t flex-shrink-0">
+                        <Separator className="my-2 sm:my-4"/>
                         <div className="flex justify-between font-bold text-lg mb-4">
                             <span>Total:</span>
                             <span>${total.toFixed(2)}</span>

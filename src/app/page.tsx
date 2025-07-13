@@ -47,7 +47,7 @@ export default function Home() {
     <div className="flex min-h-screen w-full flex-col bg-background font-body">
       <div className="flex w-full">
         {/* Sidebar */}
-        <aside className="w-16 flex-shrink-0 bg-card border-r flex flex-col items-center py-4">
+        <aside className="hidden w-16 flex-shrink-0 bg-card border-r md:flex flex-col items-center py-4">
           <div className="p-2 bg-primary text-primary-foreground rounded-lg mb-8">
             <LayoutGrid className="h-6 w-6" />
           </div>
@@ -57,15 +57,15 @@ export default function Home() {
         </aside>
 
         {/* Main Content */}
-        <div className="flex-1">
-          <header className="flex h-20 items-center justify-between border-b bg-card px-6">
+        <div className="flex-1 flex flex-col">
+          <header className="flex h-20 items-center justify-between border-b bg-card px-4 sm:px-6">
             <div>
-              <h1 className="text-xl font-bold text-foreground font-headline">
+              <h1 className="text-lg sm:text-xl font-bold text-foreground font-headline">
                 Hi, James! 👋
               </h1>
-              <p className="text-muted-foreground text-sm">Welcome back to DineFlow.</p>
+              <p className="text-sm text-muted-foreground">Welcome back to DineFlow.</p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <NotificationBell />
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -85,9 +85,9 @@ export default function Home() {
             </div>
           </header>
 
-          <main className="flex-1 overflow-y-auto p-6">
-            <div className="mb-6 flex justify-between items-center">
-              <h2 className="text-2xl font-semibold">Tables Overview</h2>
+          <main className="flex-1 overflow-y-auto p-4 sm:p-6">
+            <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <h2 className="text-xl md:text-2xl font-semibold">Tables Overview</h2>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline" className="h-10">
