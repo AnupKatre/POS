@@ -1,3 +1,5 @@
+'use client';
+
 import type { PropsWithChildren } from 'react';
 import AppSidebar from '@/components/AppSidebar';
 import { SidebarProvider, useSidebar } from '@/hooks/use-sidebar';
