@@ -12,7 +12,6 @@ import {
   Settings,
   Utensils,
   ChefHat,
-  Home,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
@@ -21,6 +20,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useSidebar } from '@/hooks/use-sidebar';
 
 const navItems = [
   { href: '/', label: 'Waiter', icon: Utensils },
@@ -34,12 +34,15 @@ const navItems = [
 
 export default function AppSidebar() {
   const pathname = usePathname();
+  const { isExpanded, expandSidebar } = useSidebar();
 
   return (
     <TooltipProvider delayDuration={0}>
       <aside
+        onMouseEnter={expandSidebar}
         className={cn(
-          'fixed bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center z-20'
+          'fixed bottom-0 left-0 right-0 flex flex-col items-center z-20 transition-all duration-300 ease-in-out',
+          isExpanded ? 'bottom-4' : '-bottom-14'
         )}
       >
         <div className={cn(

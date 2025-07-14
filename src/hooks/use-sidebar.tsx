@@ -1,12 +1,10 @@
 
-// src/hooks/use-sidebar.tsx
 'use client';
 
 import React, { createContext, useState, useContext, useCallback } from 'react';
 
 interface SidebarContextType {
   isExpanded: boolean;
-  toggleSidebar: () => void;
   expandSidebar: () => void;
   collapseSidebar: () => void;
 }
@@ -24,10 +22,6 @@ export function useSidebar() {
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleSidebar = useCallback(() => {
-    setIsExpanded(prev => !prev);
-  }, []);
-
   const expandSidebar = useCallback(() => {
     setIsExpanded(true);
   }, []);
@@ -37,7 +31,7 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <SidebarContext.Provider value={{ isExpanded, toggleSidebar, expandSidebar, collapseSidebar }}>
+    <SidebarContext.Provider value={{ isExpanded, expandSidebar, collapseSidebar }}>
       {children}
     </SidebarContext.Provider>
   );
