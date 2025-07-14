@@ -1,7 +1,6 @@
 
 import type {Metadata} from 'next';
 import './globals.css';
-import { Toaster } from "@/components/ui/toaster"
 import { Poppins } from 'next/font/google'
 import { SidebarProvider } from '@/hooks/use-sidebar';
 import AppBody from '@/components/AppBody';
@@ -27,7 +26,6 @@ export default function RootLayout({
         <SidebarProvider>
           <AppBody>{children}</AppBody>
         </SidebarProvider>
-        <Toaster />
     </html>
   );
 }

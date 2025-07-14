@@ -3,6 +3,7 @@
 
 import { useSidebar } from '@/hooks/use-sidebar';
 import AppSidebar from '@/components/AppSidebar';
+import { Toaster } from './ui/toaster';
 
 export default function AppBody({ children }: { children: React.ReactNode }) {
     const { isExpanded } = useSidebar();
@@ -14,6 +15,7 @@ export default function AppBody({ children }: { children: React.ReactNode }) {
           </main>
           <AppSidebar />
         </div>
+        <Toaster />
       </body>
     );
   }
