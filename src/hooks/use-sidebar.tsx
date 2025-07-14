@@ -6,6 +6,8 @@ import React, { createContext, useState, useContext, useCallback } from 'react';
 interface SidebarContextType {
   isExpanded: boolean;
   toggleSidebar: () => void;
+  expandSidebar: () => void;
+  collapseSidebar: () => void;
 }
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
@@ -25,8 +27,16 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
     setIsExpanded(prev => !prev);
   }, []);
 
+  const expandSidebar = useCallback(() => {
+    setIsExpanded(true);
+  }, []);
+
+  const collapseSidebar = useCallback(() => {
+    setIsExpanded(false);
+  }, []);
+
   return (
-    <SidebarContext.Provider value={{ isExpanded, toggleSidebar }}>
+    <SidebarContext.Provider value={{ isExpanded, toggleSidebar, expandSidebar, collapseSidebar }}>
       {children}
     </SidebarContext.Provider>
   );

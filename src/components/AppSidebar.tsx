@@ -4,7 +4,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  ChevronRight,
   LayoutGrid,
   ClipboardList,
   Users,
@@ -21,7 +20,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Button } from './ui/button';
 import { useSidebar } from '@/hooks/use-sidebar';
 
 const navItems = [
@@ -36,13 +34,17 @@ const navItems = [
 
 export default function AppSidebar() {
   const pathname = usePathname();
-  const { isExpanded, toggleSidebar } = useSidebar();
+  const { isExpanded, expandSidebar } = useSidebar();
 
   return (
     <TooltipProvider delayDuration={0}>
       <aside
+        onClick={(e) => {
+          e.stopPropagation();
+          expandSidebar();
+        }}
         className={cn(
-          'sticky top-0 left-0 h-screen flex flex-col items-center bg-card text-card-foreground py-4 transition-all duration-300 ease-in-out',
+          'sticky top-0 left-0 h-screen flex flex-col items-center bg-card text-card-foreground py-4 transition-all duration-300 ease-in-out cursor-pointer',
           isExpanded ? 'w-56' : 'w-20'
         )}
       >
@@ -52,14 +54,6 @@ export default function AppSidebar() {
                 <span className={cn('font-bold text-lg transition-opacity', isExpanded ? 'opacity-100' : 'opacity-0 w-0')}>DineFlow</span>
             </Link>
         </div>
-        
-        <button
-          onClick={toggleSidebar}
-          className="absolute -right-3 top-16 z-10 p-1 bg-background border rounded-full text-muted-foreground hover:text-foreground transition-transform duration-300"
-          style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
-        >
-          <ChevronRight className="h-4 w-4" />
-        </button>
 
         <nav className="flex flex-col items-start gap-2 mt-10 w-full px-4">
           {navItems.map((item) => {
