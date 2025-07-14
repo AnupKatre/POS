@@ -42,7 +42,7 @@ export default function AppSidebar() {
     <TooltipProvider delayDuration={0}>
       <aside
         className={cn(
-          'sticky top-0 left-0 h-screen flex flex-col items-center border-r bg-card text-card-foreground py-4 transition-all duration-300 ease-in-out',
+          'sticky top-0 left-0 h-screen flex flex-col items-center bg-card text-card-foreground py-4 transition-all duration-300 ease-in-out',
           isExpanded ? 'w-56' : 'w-20'
         )}
       >
