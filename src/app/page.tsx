@@ -17,6 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import AppSidebar from '@/components/AppSidebar';
+import { SidebarProvider } from '@/hooks/use-sidebar';
 
 const ALL_STATUSES: TableStatus[] = ['Free', 'Occupied', 'Serving', 'Billing'];
 
@@ -44,6 +45,7 @@ export default function WaiterPage() {
     : tables.filter((table) => table.status === activeFilter);
 
   return (
+    <SidebarProvider>
     <div className="flex min-h-screen w-full flex-col bg-background font-body">
       <div className="flex">
         <AppSidebar />
@@ -111,5 +113,6 @@ export default function WaiterPage() {
         />
       )}
     </div>
+    </SidebarProvider>
   );
 }
