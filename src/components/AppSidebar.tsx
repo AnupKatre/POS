@@ -21,7 +21,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { useSidebar } from '@/hooks/use-sidebar';
 
 const navItems = [
   { href: '/', label: 'Waiter', icon: Utensils },
@@ -35,18 +34,12 @@ const navItems = [
 
 export default function AppSidebar() {
   const pathname = usePathname();
-  const { isExpanded, expandSidebar } = useSidebar();
 
   return (
     <TooltipProvider delayDuration={0}>
       <aside
-        onClick={(e) => {
-          e.stopPropagation();
-          expandSidebar();
-        }}
         className={cn(
-          'fixed bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center transition-all duration-300 ease-in-out cursor-pointer z-20',
-          isExpanded ? 'h-36' : 'h-16'
+          'fixed bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center z-20'
         )}
       >
         <div className={cn(
@@ -62,25 +55,20 @@ export default function AppSidebar() {
                   <Link
                     href={item.comingSoon ? '#' : item.href}
                     className={cn(
-                      'flex flex-col items-center w-20 h-16 justify-center rounded-lg transition-colors overflow-hidden py-2',
+                      'flex flex-col items-center w-16 h-16 justify-center rounded-lg transition-colors',
                       isActive
                         ? 'bg-primary/10 text-primary'
                         : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
                       item.comingSoon && 'cursor-not-allowed opacity-60'
                     )}
                   >
-                    <div className="flex flex-col items-center gap-1">
-                      <item.icon className="h-5 w-5 flex-shrink-0" />
-                      <span className={cn('font-medium text-xs whitespace-nowrap transition-opacity', isExpanded ? 'opacity-100' : 'opacity-0 h-0')}>
-                        {item.label}
-                      </span>
-                    </div>
-                     {item.comingSoon && !isExpanded && (
+                    <item.icon className="h-6 w-6 flex-shrink-0" />
+                     {item.comingSoon && (
                        <span className="absolute bottom-2 text-[8px] bg-muted text-muted-foreground px-1 py-0 rounded-sm">Soon</span>
                      )}
                   </Link>
                 </TooltipTrigger>
-                <TooltipContent side="top">
+                <TooltipContent side="top" className="mb-2">
                   <p>{item.label}{item.comingSoon && ' (Coming Soon)'}</p>
                 </TooltipContent>
               </Tooltip>

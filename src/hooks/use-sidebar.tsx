@@ -1,3 +1,4 @@
+
 // src/hooks/use-sidebar.tsx
 'use client';
 
@@ -21,7 +22,7 @@ export function useSidebar() {
 }
 
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleSidebar = useCallback(() => {
     setIsExpanded(prev => !prev);
