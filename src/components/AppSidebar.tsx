@@ -45,18 +45,13 @@ export default function AppSidebar() {
           expandSidebar();
         }}
         className={cn(
-          'sticky bottom-0 left-0 w-full flex flex-col items-center bg-card text-card-foreground px-4 transition-all duration-300 ease-in-out cursor-pointer z-20',
-          isExpanded ? 'h-40' : 'h-20'
+          'fixed bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center transition-all duration-300 ease-in-out cursor-pointer z-20',
+          isExpanded ? 'h-36' : 'h-16'
         )}
       >
-        <div className={cn('flex items-center justify-center py-2', isExpanded ? 'w-full' : 'w-auto')}>
-            <Link href="/dashboard" className="flex flex-col items-center gap-1">
-                <Home className="h-6 w-6 text-primary flex-shrink-0" />
-                <span className={cn('font-bold text-xs transition-opacity', isExpanded ? 'opacity-100' : 'opacity-0 h-0')}>DineFlow</span>
-            </Link>
-        </div>
-
-        <nav className="flex items-center justify-center gap-2 w-full">
+        <div className={cn(
+            'flex items-center justify-center gap-2 p-2 bg-card text-card-foreground rounded-2xl shadow-lg border'
+        )}>
           {navItems.map((item) => {
             const isActive =
               (item.href === '/' && pathname === '/') ||
@@ -91,7 +86,7 @@ export default function AppSidebar() {
               </Tooltip>
             );
           })}
-        </nav>
+        </div>
       </aside>
     </TooltipProvider>
   );

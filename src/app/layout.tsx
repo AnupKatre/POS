@@ -27,8 +27,8 @@ export default function RootLayout({
     <html lang="en" className={poppins.variable}>
       <body className="font-body antialiased">
         <SidebarProvider>
-            <div className="flex flex-col h-screen w-full bg-card">
-              <main className="flex-1 flex flex-col overflow-y-auto bg-background rounded-b-3xl shadow-lg relative z-10">
+            <div className="flex flex-col h-screen w-full bg-background">
+              <main className="flex-1 flex flex-col overflow-y-auto relative z-10">
                 {children}
               </main>
               <AppSidebar />
