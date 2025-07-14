@@ -3,9 +3,8 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { Poppins } from 'next/font/google'
-import AppSidebar from '@/components/AppSidebar';
-import { cn } from '@/lib/utils';
 import { SidebarProvider } from '@/hooks/use-sidebar';
+import AppBody from '@/components/AppBody';
 
 export const metadata: Metadata = {
   title: 'DineFlow',
@@ -25,17 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={poppins.variable}>
-      <body className="font-body antialiased">
         <SidebarProvider>
-            <div className="flex flex-col h-screen w-full bg-secondary">
-              <main className="flex-1 flex flex-col overflow-y-auto relative z-10 rounded-2xl bg-background shadow-lg m-4 transition-[margin] duration-300 ease-in-out group-data-[sidebar-is-expanded=true]:mb-24 group-data-[sidebar-is-expanded=false]:mb-4">
-                {children}
-              </main>
-              <AppSidebar />
-            </div>
+          <AppBody>{children}</AppBody>
         </SidebarProvider>
         <Toaster />
-      </body>
     </html>
   );
 }

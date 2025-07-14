@@ -22,11 +22,6 @@ export function useSidebar() {
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  useEffect(() => {
-    // Add data attribute to body for styling based on sidebar state
-    document.documentElement.setAttribute('data-sidebar-is-expanded', String(isExpanded));
-  }, [isExpanded]);
-
   const expandSidebar = useCallback(() => {
     setIsExpanded(true);
   }, []);
@@ -39,9 +34,7 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <SidebarContext.Provider value={value}>
-      <div className="group" data-sidebar-is-expanded={isExpanded}>
         {children}
-      </div>
     </SidebarContext.Provider>
   );
 }
