@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -47,7 +48,7 @@ export default function WaiterPage() {
   return (
     <>
       <div className="flex-1 overflow-y-auto p-4 sm:p-6 no-scrollbar" onClick={collapseSidebar}>
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-end mb-4">
               <div className="flex items-center gap-2 sm:gap-4">
                   <NotificationBell />
                   <DropdownMenu>
