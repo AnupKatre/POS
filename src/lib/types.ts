@@ -20,3 +20,14 @@ export interface MenuItem {
 export interface OrderItem extends MenuItem {
   quantity: number;
 }
+
+export type StaffRole = 'Manager' | 'Head Waiter' | 'Waiter' | 'Chef' | 'Sous Chef' | 'Hostess';
+
+export interface StaffMember {
+    id: number;
+    name: string;
+    role: StaffRole;
+    shift: string;
+    status: 'On Shift' | 'Off Duty';
+    avatar: string;
+}
