@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <SidebarProvider>
             <div className="flex flex-col h-screen w-full bg-secondary">
-              <main className="flex-1 flex flex-col overflow-y-auto relative z-10 rounded-2xl bg-background shadow-lg m-4 mb-24">
+              <main className="flex-1 flex flex-col overflow-y-auto relative z-10 rounded-2xl bg-background shadow-lg m-4 transition-[margin] duration-300 ease-in-out group-data-[sidebar-is-expanded=true]:mb-24 group-data-[sidebar-is-expanded=false]:mb-4">
                 {children}
               </main>
               <AppSidebar />
