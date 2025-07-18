@@ -1,5 +1,4 @@
 
-// src/components/AppSidebar.tsx
 'use client';
 
 import Link from 'next/link';
@@ -20,7 +19,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { useSidebar } from '@/hooks/use-sidebar';
 
 const navItems = [
   { href: '/', label: 'Waiter', icon: Utensils },
@@ -34,19 +32,16 @@ const navItems = [
 
 export default function AppSidebar() {
   const pathname = usePathname();
-  const { isExpanded, expandSidebar } = useSidebar();
 
   return (
     <TooltipProvider delayDuration={0}>
       <aside
-        onMouseEnter={expandSidebar}
         className={cn(
-          'fixed bottom-0 left-0 right-0 flex flex-col items-center z-20 transition-all duration-300 ease-in-out',
-          isExpanded ? 'bottom-4' : '-bottom-14'
+          'fixed bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center z-20'
         )}
       >
         <div className={cn(
-            'flex items-center justify-center gap-2 p-2 bg-card text-card-foreground rounded-2xl shadow-lg border'
+            'flex items-center justify-center gap-2 p-2 bg-card text-card-foreground rounded-2xl shadow-lg border rounded-b-xl'
         )}>
           {navItems.map((item) => {
             const isActive =

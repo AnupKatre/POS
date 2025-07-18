@@ -2,7 +2,6 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { Poppins } from 'next/font/google'
-import { SidebarProvider } from '@/hooks/use-sidebar';
 import AppBody from '@/components/AppBody';
 
 export const metadata: Metadata = {
@@ -23,9 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={poppins.variable}>
-        <SidebarProvider>
-          <AppBody>{children}</AppBody>
-        </SidebarProvider>
+        <body className="font-body antialiased">
+            <AppBody>{children}</AppBody>
+        </body>
     </html>
   );
 }

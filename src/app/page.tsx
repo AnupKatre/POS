@@ -17,7 +17,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useSidebar } from '@/hooks/use-sidebar';
 
 const ALL_STATUSES: TableStatus[] = ['Free', 'Occupied', 'Serving', 'Billing'];
 
@@ -25,7 +24,6 @@ export default function WaiterPage() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedTable, setSelectedTable] = useState<Table | null>(null);
   const [activeFilter, setActiveFilter] = useState<TableStatus | 'All'>('All');
-  const { collapseSidebar } = useSidebar();
 
   const handleTableSelect = (table: Table) => {
     if (table.status !== 'Billing') {
@@ -47,7 +45,7 @@ export default function WaiterPage() {
 
   return (
     <>
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6 no-scrollbar" onClick={collapseSidebar}>
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6 no-scrollbar">
           <div className="flex items-center justify-end mb-4">
               <div className="flex items-center gap-2 sm:gap-4">
                   <NotificationBell />
