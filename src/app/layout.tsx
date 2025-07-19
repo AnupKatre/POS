@@ -1,18 +1,11 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
-import { Poppins } from 'next/font/google'
 
 export const metadata: Metadata = {
-  title: 'DineFlow',
+  title: 'POS Application',
   description: 'Restaurant POS Interface',
 };
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-poppins',
-})
 
 export default function RootLayout({
   children,
@@ -20,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={poppins.variable}>
-      <body className="font-body antialiased">
+    <html lang="en">
+      <body className="font-sans antialiased">
         {children}
         <Toaster />
       </body>

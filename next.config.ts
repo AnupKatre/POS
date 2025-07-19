@@ -18,6 +18,12 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Tauri configuration
+  output: 'export',
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
+  distDir: 'out',
+  assetPrefix: '',
 };
 
 export default nextConfig;
